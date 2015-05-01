@@ -25,10 +25,11 @@ module.exports = (grunt) ->
   grunt.initConfig
 
     # Project settings
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON 'package.json'
     yeoman:
       # configurable paths
-      client: require('./bower.json').appPath or 'client'
+      <% if(filters.useclient) { %>
+      client: require('./bower.json').appPath or 'client'<% } %>
       dist: 'dist'
 
     express:
@@ -48,7 +49,7 @@ module.exports = (grunt) ->
       server:
         url: 'http://localhost:<%%= express.options.port %>'
 
-    watch:
+    watch:<% if(filters.useclient) { %>
       injectJS:
         files: [
           '<%%= yeoman.client %>/{app,components}/**/*.js'
@@ -61,10 +62,6 @@ module.exports = (grunt) ->
       injectCss:
         files: ['<%%= yeoman.client %>/{app,components}/**/*.css']
         tasks: ['injector:css']
-
-      mochaTest:
-        files: ['.server/**/*.spec.js']
-        tasks: ['env:test', 'mochaTest']
 
       jsTest:
         files: [
@@ -114,19 +111,9 @@ module.exports = (grunt) ->
           'injector:scripts'
         ]
 
-      coffeeNode:
-        files: ['server/**/*.{coffee,litcoffee,coffee.md}']
-        tasks: ['newer:coffee']
-
       coffeeTest:
         files: ['<%%= yeoman.client %>/{app,components}/**/*.spec.{coffee,litcoffee,coffee.md}']
-        tasks: ['karma']
-        
-      gruntfile:
-        files: ['Gruntfile.coffee']<% } else {%>
-
-      gruntfile:
-        files: ['Gruntfile.js']<% }%>
+        tasks: ['karma']<% }%>
 
       livereload:
         files: [
@@ -138,14 +125,42 @@ module.exports = (grunt) ->
           '<%%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
         options:
-          livereload: true
+          livereload: true<% }%><% if(filters.coffee) { %>
 
-      express:
-        files: ['.server/**/*.{js,json}']
+      coffeeNode:
+        files: ['server/**/*.{coffee,litcoffee,coffee.md}']
+        tasks: ['newer:coffee']
+
+      mochaTest:
+        files: ['.server/**/*.spec.js']
+        tasks: ['env:test', 'mochaTest']
+
+      gruntfile:
+        files: ['Gruntfile.coffee']<% } else { %>
+
+      mochaTest:
+        files: ['server/**/*.spec.js']
+        tasks: ['env:test', 'mochaTest']
+
+      gruntfile:
+        files: ['Gruntfile.js']<% }%>
+
+      express:<% if(filters.coffee) { %>
+        files: ['.server/**/*.{js,json}']<% } else { %>
+        files: ['server/**/*.{js,json}']<% } %>
         tasks: ['express:dev', 'wait']
         options:
           livereload: true
           nospawn: true #Without this option specified express won't be reloaded
+
+    coffeelint:
+      app: [
+        'server/**/*.coffee'
+        'client/**/*.coffee'
+      ]
+      options:
+        max_line_length:
+          level: 'ignore'
 
     # Make sure code styles are up to par and there are no obvious mistakes
     jshint:
@@ -356,8 +371,7 @@ module.exports = (grunt) ->
 
     # Copies remaining files to places other tasks can use
     copy:
-      <% if(filters.coffee) { %>
-      node:
+      node:<% if(filters.coffee) { %>
         files: [
           expand: true
           cwd: 'server'
@@ -365,11 +379,10 @@ module.exports = (grunt) ->
           src: [
             'views/**/*'
           ]
-        ],
-      <% } %>
+        ]<% } %>
 
       dist:
-        files: [
+        files: [<% if(filters.useclient) { %>
           expand: true
           dot: true
           cwd: '<%%= yeoman.client %>'
@@ -377,7 +390,7 @@ module.exports = (grunt) ->
           src: [
             '*.{ico,png,txt}'
             '.htaccess'
-            'bower_components/**/*'
+            'bower_components/bootstrap-sass-official/**/*'
             'assets/images/{,*/}*.{webp}'
             'assets/fonts/**/*'
             'index.html'
@@ -387,22 +400,22 @@ module.exports = (grunt) ->
           cwd: '.tmp/images'
           dest: '<%%= yeoman.dist %>/public/assets/images'
           src: ['generated/*']
-        ,<% if(filters.coffee) { %>
+        ,<% } %><% if(filters.coffee) { %>
           expand: true
           cwd: '.server'
           dest: '<%%= yeoman.dist %>/server'
-          src: [
-            'package.json'
-            '**/*'
-          ]
-        ]<% } else { %>
+          src: ['**/*']
+        ,
+          expand: true
+          dest: '<%%= yeoman.dist %>'
+          src: ['package.json']<% } else { %>
           expand: true,
           dest: '<%%= yeoman.dist %>'
           src: [
             'package.json'
             'server/**/*'
-          ]
-        ]<% } %>
+          ]<% } %>
+        ]
 
       styles:
         expand: true
@@ -439,11 +452,11 @@ module.exports = (grunt) ->
         'less'<% } %>
       ]
       test: [<% if(filters.coffee) { %>
-        'coffee'<% } %><% if(filters.jade) { %>
+        'coffee'<% } %><%if(filters.useclient) { %><% if(filters.jade) { %>
         'jade'<% } %><% if(filters.stylus) { %>
         'stylus'<% } %><% if(filters.sass) { %>
         'sass'<% } %><% if(filters.less) { %>
-        'less'<% } %>
+        'less'<% } %><% } %>
       ],
       debug:
         tasks: [
@@ -454,13 +467,13 @@ module.exports = (grunt) ->
           logConcurrentOutput: true
 
       dist: [<% if(filters.coffee) { %>
-        'coffee'<% } %><% if(filters.jade) { %>
+        'coffee'<% } %><%if(filters.useclient) { %><% if(filters.jade) { %>
         'jade'<% } %><% if(filters.stylus) { %>
         'stylus'<% } %><% if(filters.sass) { %>
         'sass'<% } %><% if(filters.less) { %>
         'less'<% } %>
         'imagemin'
-        'svgmin'
+        'svgmin'<% } %>
       ]
 
     # Test settings
@@ -514,7 +527,7 @@ module.exports = (grunt) ->
     coffee:
       options:
         sourceMap: true
-        sourceRoot: ''
+        sourceRoot: ''<% if(filters.useclient) { %>
 
       client:
         files: [
@@ -526,7 +539,7 @@ module.exports = (grunt) ->
           ]
           dest: '.tmp'
           ext: '.js'
-        ]
+        ]<% } %>
 
       server:
         files: [
@@ -696,31 +709,31 @@ module.exports = (grunt) ->
 
     if target is 'debug'
       return grunt.task.run [
-        'clean:server'
+        'clean:server'<% if(filters.useclient) { %>
         'env:all'<% if(filters.stylus) { %>
         'injector:stylus'<% } %><% if(filters.less) { %>
         'injector:less'<% } %><% if(filters.sass) { %>
-        'injector:sass'<% } %>
-        'concurrent:server'
+        'injector:sass'<% } %><% } %>
+        'concurrent:server'<% if(filters.useclient) { %>
         'injector'
         'wiredep'
-        'autoprefixer'
+        'autoprefixer'<% } %>
         'concurrent:debug'
       ]
 
     grunt.task.run [
-      'clean:server'
+      'clean:server'<% if(filters.useclient) { %>
       'env:all'<% if(filters.stylus) { %>
       'injector:stylus'<% } %><% if(filters.less) { %>
       'injector:less'<% } %><% if(filters.sass) { %>
-      'injector:sass'<% } %>
-      'concurrent:server'
+      'injector:sass'<% } %><% } %>
+      'concurrent:server'<% if(filters.useclient) { %>
       'injector'
       'wiredep'
-      'autoprefixer'
+      'autoprefixer'<% } %>
       'express:dev'
-      'wait'
-      'open'
+      'wait'<% if(filters.useclient) { %>
+      'open'<% } %>
       'watch'
     ]
 
@@ -738,7 +751,7 @@ module.exports = (grunt) ->
 
     else if target is 'client'
       return grunt.task.run [
-        'clean:server'
+        'clean:server'<% if(filters.useclient) { %>
         'env:all'<% if(filters.stylus) { %>
         'injector:stylus'<% } %><% if(filters.less) { %>
         'injector:less'<% } %><% if(filters.sass) { %>
@@ -746,12 +759,12 @@ module.exports = (grunt) ->
         'concurrent:test'
         'injector'
         'autoprefixer'
-        'karma'
+        'karma'<% } %>
       ]
 
     else if target is 'e2e'
       return grunt.task.run [
-        'clean:server'
+        'clean:server'<% if(filters.useclient) { %>
         'env:all'
         'env:test'<% if(filters.stylus) { %>
         'injector:stylus'<% } %><% if(filters.less) { %>
@@ -760,36 +773,37 @@ module.exports = (grunt) ->
         'concurrent:test'
         'injector'
         'wiredep'
-        'autoprefixer'
-        'express:dev'
-        'protractor'
+        'autoprefixer'<% } %>
+        'express:dev'<% if(filters.useclient) { %>
+        'protractor'<% } %>
       ]
 
     else
       return grunt.task.run [
-        'test:server'
-        'test:client'
+        'test:server'<% if(filters.useclient) { %>
+        'test:client'<% } %>
       ]
 
   grunt.registerTask 'build', [
-    'clean:dist'<% if(filters.stylus) { %>
+    'clean:dist'<% if(filters.useclient) { %><% if(filters.stylus) { %>
     'injector:stylus'<% } %><% if(filters.less) { %>
     'injector:less'<% } %><% if(filters.sass) { %>
-    'injector:sass'<% } %>
-    'concurrent:dist'
+    'injector:sass'<% } %><% } %>
+    'concurrent:dist'<% if(filters.useclient) { %>
     'injector'
     'wiredep'
     'useminPrepare'
     'autoprefixer'
     'ngtemplates'
     'concat'
-    'ngAnnotate'
-    'copy:dist'
-    'cdnify'
+    'ngAnnotate'<% } %>
+    'copy:node'
+    'copy:dist'<% if(filters.useclient) { %>
+#    'cdnify'
     'cssmin'
     'uglify'
     'rev'
-    'usemin'
+    'usemin'<% } %>
   ]
 
   grunt.registerTask('default', [<% if(filters.coffee) { %>

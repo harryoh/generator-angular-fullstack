@@ -59,15 +59,16 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
     }
   },
 
-  clientPrompts: function() {
+  coffeePrompts: function() {
     if(this.skipConfig) return;
     var cb = this.async();
 
-    this.log('# Client\n');
+    this.log('# Choice script type\n');
 
     this.prompt([{
         type: "list",
         name: "script",
+        default: 1,
         message: "What would you like to write scripts with?",
         choices: [ "JavaScript", "CoffeeScript"],
         filter: function( val ) {
@@ -78,45 +79,74 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
 
           return filterMap[val];
         }
+      }], function (answers) {
+        this.filters[answers.script] = true;
+        this.filters.html = true;
+        cb();
+      }.bind(this));
+  },
+
+  clientPrompts: function() {
+    if(this.skipConfig) return;
+    var cb = this.async();
+
+    this.log('\n# Client\n');
+
+    this.prompt([{
+        type: "confirm",
+        name: "useclient",
+        message: "Would you like to create Client Side?"
       }, {
         type: "list",
         name: "markup",
         message: "What would you like to write markup with?",
         choices: [ "HTML", "Jade"],
-        filter: function( val ) { return val.toLowerCase(); }
+        filter: function( val ) { return val.toLowerCase(); },
+        when: function (answers) {
+          return answers.useclient;
+        }
       }, {
         type: "list",
         name: "stylesheet",
         default: 1,
         message: "What would you like to write stylesheets with?",
         choices: [ "CSS", "Sass", "Stylus", "Less"],
-        filter: function( val ) { return val.toLowerCase(); }
+        filter: function( val ) { return val.toLowerCase(); },
+        when: function (answers) {
+          return answers.useclient;
+        }
       },  {
         type: "list",
         name: "router",
         default: 1,
         message: "What Angular router would you like to use?",
         choices: [ "ngRoute", "uiRouter"],
-        filter: function( val ) { return val.toLowerCase(); }
+        filter: function( val ) { return val.toLowerCase(); },
+        when: function (answers) {
+          return answers.useclient;
+        }
       }, {
         type: "confirm",
         name: "bootstrap",
-        message: "Would you like to include Bootstrap?"
+        message: "Would you like to include Bootstrap?",
+        when: function (answers) {
+          return answers.useclient;
+        }
       }, {
         type: "confirm",
         name: "uibootstrap",
         message: "Would you like to include UI Bootstrap?",
         when: function (answers) {
-          return answers.bootstrap;
+          return answers.bootstrap || answers.useclient;
         }
       }], function (answers) {
-        this.filters[answers.script] = true;
         this.filters[answers.markup] = true;
         this.filters[answers.stylesheet] = true;
         this.filters[answers.router] = true;
+        this.filters.useclient = !!answers.useclient;
         this.filters.bootstrap = !!answers.bootstrap;
         this.filters.uibootstrap =  !!answers.uibootstrap;
-      cb();
+        cb();
       }.bind(this));
   },
 
@@ -229,6 +259,7 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
     if(this.filters.stylus) extensions.push('styl');
     if(this.filters.sass) extensions.push('scss');
     if(this.filters.less) extensions.push('less');
+    if(this.filters.useclient) extensions.push('useclient');
 
     this.composeWith('ng-component', {
       options: {

@@ -1,15 +1,15 @@
 {
   "generator-angular-fullstack": {
     "insertRoutes": "true",
-    "registerRoutesFile": "server/routes.js",
-    "routesNeedle": "// Insert routes below",
+    "registerRoutesFile": "server/routes.coffee",
+    "routesNeedle": "# Insert routes below",
     "insertSockets": "true",
-    "registerSocketsFile": "server/config/socketio.js",
-    "socketsNeedle": "// Insert sockets below",
+    "registerSocketsFile": "server/config/socketio.coffee",
+    "socketsNeedle": "# Insert sockets below",
     "filters": {
       "coffee": true,
       "html": true,
-      "less": true,
+      "sass": true,
       "uirouter": true,
       "socketio": true,
       "mongoose": true,

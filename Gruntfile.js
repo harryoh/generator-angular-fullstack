@@ -132,6 +132,7 @@ module.exports = function (grunt) {
     function generateDemo() {
       var deferred = Q.defer();
       var options = {
+        useclient: false,
         script: 'coffee',
         markup: 'html',
         stylesheet: 'sass',

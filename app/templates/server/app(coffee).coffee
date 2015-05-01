@@ -18,7 +18,7 @@ require './config/seed'  if config.seedDB
 
 <% } %># Setup server
 app = express()
-server = require('http').createServer(app)<% if (filters.socketio) { %>
+server = require('http').createServer app<% if (filters.socketio) { %>
 socketio = require('socket.io')(server,
   serveClient: (if (config.env is 'production') then false else true)
   path: '/socket.io-client'

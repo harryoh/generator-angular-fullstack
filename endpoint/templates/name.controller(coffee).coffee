@@ -1,4 +1,4 @@
-use strict'
+'use strict'
 
 _ = require 'lodash'<% if (filters.mongoose) { %>
 <%= classedName %> = require './<%= name %>.model'<% } %>
@@ -8,9 +8,7 @@ exports.index = (req, res) -><% if (!filters.mongoose) { %>
   res.json []<% } %><% if (filters.mongoose) { %>
   <%= classedName %>.find (err, <%= name %>s) ->
     return handleError res, err  if err
-    res.status(200).json <%= name %>s
-  <% } %>
-<% if (filters.mongoose) { %>
+    res.status(200).json <%= name %>s<% } %><% if (filters.mongoose) { %>
 
 # Get a single <%= name %>
 exports.show = (req, res) ->
@@ -46,5 +44,4 @@ exports.destroy = (req, res) ->
       res.status(204).send 'No Content'
 
 handleError = (res, err) ->
-  res.status(500).send err
-<% } %>
+  res.status(500).send err<% } %>

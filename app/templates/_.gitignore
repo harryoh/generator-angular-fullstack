@@ -1,5 +1,6 @@
 node_modules
-public
+public<% if(filters.coffee) { %>
+.server<% } %>
 .tmp<% if(filters.sass) { %>
 .sass-cache<% } %>
 .idea

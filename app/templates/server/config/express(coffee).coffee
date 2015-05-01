@@ -4,8 +4,8 @@ Express configuration
 
 'use strict'
 
-express = require 'express'
-favicon = require 'serve-favicon'
+express = require 'express'<% if (filters.useclient) { %>
+favicon = require 'serve-favicon'<% } %>
 morgan = require 'morgan'
 compression = require 'compression'
 bodyParser = require 'body-parser'
@@ -16,7 +16,7 @@ path = require 'path'
 config = require './environment'<% if (filters.auth) { %>
 passport = require 'passport'<% } %><% if (filters.twitterAuth) { %>
 session = require 'express-session'
-mongoStore = require('connect-mongo')(session);
+mongoStore = require('connect-mongo')(session)
 mongoose = require 'mongoose'<% } %>
 
 module.exports = (app) ->
@@ -43,16 +43,16 @@ module.exports = (app) ->
   )
   <% } %>
 
-  if 'production' is env
+  if 'production' is env<% if (filters.useclient) { %>
     app.use favicon(path.join(config.root, 'public', 'favicon.ico'))
     app.use express.static(path.join(config.root, 'public'))
-    app.set 'appPath', config.root + '/public'
+    app.set 'appPath', config.root + '/public'<% } %>
     app.use morgan('dev')
 
-  if 'development' is env or 'test' is env
+  if 'development' is env or 'test' is env<% if (filters.useclient) { %>
     app.use require('connect-livereload')()
     app.use express.static(path.join(config.root, '.tmp'))
     app.use express.static(path.join(config.root, 'client'))
-    app.set 'appPath', 'client'
+    app.set 'appPath', 'client'<% } %>
     app.use morgan('dev')
     app.use errorHandler() # Error handler - has to be last

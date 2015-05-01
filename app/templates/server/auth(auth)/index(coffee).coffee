@@ -13,7 +13,7 @@ require('./twitter/passport').setup User, config<% } %>
 
 router = express.Router()
 
-router.use '/local', require './local';<% if (filters.facebookAuth) { %>
+router.use '/local', require './local'<% if (filters.facebookAuth) { %>
 router.use '/facebook', require './facebook'<% } %><% if (filters.twitterAuth) { %>
 router.use '/twitter', require './twitter'<% } %><% if (filters.googleAuth) { %>
 router.use '/google', require './google'<% } %>
