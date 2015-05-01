@@ -13,6 +13,10 @@ config = require './config/environment'
 # Connect to database
 mongoose.connect config.mongo.uri, config.mongo.options
 
+mongoose.connection.on 'error', (err) ->
+  console.error "MongoDB connection error: #{err}"
+  process.exit -1
+
 # Populate DB with sample data
 require './config/seed'  if config.seedDB
 

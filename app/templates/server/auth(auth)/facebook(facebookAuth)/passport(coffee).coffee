@@ -21,7 +21,7 @@ exports.setup = (User, config) ->
           facebook: profile._json
         )
         user.save (err) ->
-          done err  if err
+          return done err  if err
           done err, user
       else
         done err, user
