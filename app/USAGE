@@ -2,5 +2,5 @@ Description:
     Creates an full-stack AngularJS + Node app
 
 Example:
-    yo angular-fullstack
-angular-fullstack
+    yo coffee-fullstack
+coffee-fullstack

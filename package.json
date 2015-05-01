@@ -1,9 +1,11 @@
 {
-  "name": "generator-angular-fullstack",
-  "version": "2.0.13",
+  "name": "generator-coffee-fullstack",
+  "version": "0.1.0",
   "description": "Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node",
   "keywords": [
     "yeoman-generator",
+    "coffee",
+    "coffeescript",
     "mean",
     "mongodb",
     "angularjs",
@@ -15,12 +17,12 @@
     "front-end",
     "app"
   ],
-  "homepage": "https://github.com/DaftMonk/generator-angular-fullstack",
-  "bugs": "https://github.com/DaftMonk/generator-angular-fullstack/issues",
+  "homepage": "https://github.com/harryoh/generator-coffee-fullstack",
+  "bugs": "https://github.com/harry/generator-coffee-fullstack/issues",
   "author": "Tyler Henkel",
   "repository": {
     "type": "git",
-    "url": "git://github.com/DaftMonk/generator-angular-fullstack.git"
+    "url": "git://github.com/harry/generator-coffee-fullstack.git"
   },
   "scripts": {
     "test": "grunt test"
