@@ -205,7 +205,7 @@ module.exports = function (grunt) {
   grunt.registerTask('updateFixtures', 'updates package and bower fixtures', function() {
     var done = this.async();
     var packageJson = fs.readFileSync(path.resolve('app/templates/_package.json'), 'utf8');
-    var bowerJson = fs.readFileSync(path.resolve('app/templates/_bower.json'), 'utf8');
+    var bowerJson = fs.readFileSync(path.resolve('app/templates/_bower(useclient).json'), 'utf8');
 
     // replace package name
     packageJson = packageJson.replace(/"name": "<%(.*)%>"/g, '"name": "tempApp"');

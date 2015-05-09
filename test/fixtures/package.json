@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
-    "express": "~4.0.0",
+    "express": "~4.9.0",
     "morgan": "~1.0.0",
     "body-parser": "~1.5.0",
     "method-override": "~1.0.0",
@@ -44,6 +44,7 @@
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-coffee": "^0.10.1",
+    "grunt-coffeelint": "~0.0.13",
     "grunt-contrib-jade": "^0.11.0",
     "grunt-contrib-less": "^0.11.0",
     "grunt-google-cdn": "~0.4.0",
