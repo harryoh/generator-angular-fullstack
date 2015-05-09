@@ -1,6 +1,7 @@
-# AngularJS Full-Stack generator [![Build Status](https://travis-ci.org/harryoh/generator-coffee-fullstack.svg?branch=master)](http://travis-ci.org/harryoh/generator-coffee-fullstack) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/harryoh/generator-coffee-fullstack)
+# AngularJS ServerSide-Coffee Full-Stack generator [![Build Status](https://travis-ci.org/harryoh/generator-coffee-fullstack.svg?branch=master)](http://travis-ci.org/harryoh/generator-coffee-fullstack) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/harryoh/generator-coffee-fullstack)
 
-> Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node - lets you quickly set up a project following best practices.
+> Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node **with Server Side Coffeescript** - lets you quickly set up a project following best practices.
+> This is forked from [generator-angular-fullstack](https://github.com/DaftMonk/generator-angular-fullstack).
 
 ## Example project
 
