@@ -799,7 +799,7 @@ module.exports = (grunt) ->
     'ngAnnotate'<% } %>
     'copy:node'
     'copy:dist'<% if(filters.useclient) { %>
-#    'cdnify'
+    'cdnify'
     'cssmin'
     'uglify'
     'rev'
