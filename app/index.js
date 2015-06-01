@@ -7,7 +7,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var wiredep = require('wiredep');
 
-var AngularFullstackGenerator = yeoman.generators.Base.extend({
+var CoffeeFullstackGenerator = yeoman.generators.Base.extend({
 
   init: function () {
     this.argument('name', { type: String, required: false });
@@ -305,4 +305,4 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
   }
 });
 
-module.exports = AngularFullstackGenerator;
+module.exports = CoffeeFullstackGenerator;
