@@ -1,6 +1,6 @@
 {
   "name": "generator-coffee-fullstack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node",
   "keywords": [
     "yeoman-generator",
@@ -58,9 +58,5 @@
     "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
-  "licenses": [
-    {
-      "type": "BSD"
-    }
-  ]
+  "license": "BSD-2-Clause"
 }
