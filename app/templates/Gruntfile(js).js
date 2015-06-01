@@ -238,7 +238,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/',
+          cwd: <% if(filters.css) { %>'client/'<% } else { %> '.tmp/'<% } %>,
           src: '{,*/}*.css',
           dest: '.tmp/'
         }]

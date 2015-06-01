@@ -1,7 +1,7 @@
-<% if(filters.bootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";<% } %>
+<% if(filters.bootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";<% } %>
 $fa-font-path: "/bower_components/font-awesome/fonts";
 <% if(filters.bootstrap) { %>
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';<% } %>
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';<% } %>
 @import 'font-awesome/scss/font-awesome';
 
 /**
