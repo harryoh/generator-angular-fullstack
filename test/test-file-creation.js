@@ -74,7 +74,7 @@ describe('coffee-fullstack generator', function () {
         this.timeout(60000);
         gen.run({}, function () {
           exec('grunt test:client', function (error, stdout, stderr) {
-            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
+            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1 SUCCESS');
             done();
           });
         });
@@ -165,7 +165,7 @@ describe('coffee-fullstack generator', function () {
         this.timeout(60000);
         gen.run({}, function () {
           exec('grunt test:client', function (error, stdout, stderr) {
-            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
+            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1 SUCCESS');
             done();
           });
         });
@@ -212,7 +212,7 @@ describe('coffee-fullstack generator', function () {
         this.timeout(60000);
         gen.run({}, function () {
           exec('grunt test:client', function (error, stdout, stderr) {
-            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
+            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1 SUCCESS');
             done();
           });
         });
@@ -259,7 +259,7 @@ describe('coffee-fullstack generator', function () {
         this.timeout(60000);
         gen.run({}, function () {
           exec('grunt test:client', function (error, stdout, stderr) {
-            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
+            expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1 SUCCESS');
             done();
           });
         });
