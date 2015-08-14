@@ -30,6 +30,7 @@
     "socketio-jwt": "~4.2.0"<% } %>
   },
   "devDependencies": {
+    "coffee-script": "^1.9.3",<% if(filters.coffee) { %>
     "coffeelint": "~1.9.7",
     "connect-livereload": "~0.5.3",
     "grunt": "~0.4.5",
