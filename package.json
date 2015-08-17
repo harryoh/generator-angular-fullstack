@@ -19,7 +19,7 @@
   ],
   "homepage": "https://github.com/harryoh/generator-coffee-fullstack",
   "bugs": "https://github.com/harry/generator-coffee-fullstack/issues",
-  "author": "Tyler Henkel",
+  "author": "Harry Oh",
   "repository": {
     "type": "git",
     "url": "git://github.com/harry/generator-coffee-fullstack.git"
