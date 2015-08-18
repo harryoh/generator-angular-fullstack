@@ -38,6 +38,7 @@
     "grunt-build-control": "~0.5.0",
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-clean": "~0.6.0",<% if(filters.coffee) { %>
+    "coffee-script": "^1.9.3",
     "grunt-contrib-coffee": "~0.13.0",
     "grunt-coffeelint": "0.0.13",<% } %>
     "grunt-contrib-concat": "~0.5.1",
