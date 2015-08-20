@@ -1,6 +1,6 @@
 {
   "name": "generator-coffee-fullstack",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node",
   "keywords": [
     "yeoman-generator",
@@ -18,11 +18,11 @@
     "app"
   ],
   "homepage": "https://github.com/harryoh/generator-coffee-fullstack",
-  "bugs": "https://github.com/harry/generator-coffee-fullstack/issues",
+  "bugs": "https://github.com/harryoh/generator-coffee-fullstack/issues",
   "author": "Harry Oh",
   "repository": {
     "type": "git",
-    "url": "git://github.com/harry/generator-coffee-fullstack.git"
+    "url": "git://github.com/harryoh/generator-coffee-fullstack.git"
   },
   "scripts": {
     "test": "grunt test"
