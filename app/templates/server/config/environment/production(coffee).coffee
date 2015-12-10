@@ -15,4 +15,4 @@ module.exports =
     uri:  process.env.MONGOLAB_URI or
           process.env.MONGOHQ_URL or
           process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME or
-          'mongodb://localhost/<%= _.slugify(appname) %>'
+          'mongodb://localhost/<%= lodash.slugify(appname) %>'

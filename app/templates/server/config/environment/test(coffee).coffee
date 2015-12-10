@@ -6,4 +6,4 @@
 # MongoDB connection options
 module.exports =
   mongo:
-    uri: 'mongodb://localhost/<%= _.slugify(appname) %>-test'
+    uri: 'mongodb://localhost/<%= lodash.slugify(appname) %>-test'

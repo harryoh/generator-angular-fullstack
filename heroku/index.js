@@ -14,7 +14,7 @@ var Generator = module.exports = function Generator() {
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }
-  this.appname = this._.slugify(this.appname);
+  this.appname = this.lodash.slugify(this.appname);
   this.filters = this.config.get('filters') || {};
 };
 
@@ -29,7 +29,7 @@ Generator.prototype.askForName = function askForName() {
   }];
 
   this.prompt(prompts, function (props) {
-    this.deployedName = this._.slugify(props.deployedName);
+    this.deployedName = this.lodash.slugify(props.deployedName);
     done();
   }.bind(this));
 };

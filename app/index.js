@@ -6,13 +6,19 @@ var genUtils = require('../util.js');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var wiredep = require('wiredep');
+var s = require('underscore.string');
+var lodash = require('lodash');
+
+// extend lodash with underscore.string
+lodash.mixin(s.exports());
 
 var CoffeeFullstackGenerator = yeoman.generators.Base.extend({
 
   init: function () {
+    this.lodash = lodash;
     this.argument('name', { type: String, required: false });
     this.appname = this.name || path.basename(process.cwd());
-    this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+    this.appname = this.lodash.camelize(this.lodash.slugify(this.lodash.humanize(this.appname)));
 
     this.option('app-suffix', {
       desc: 'Allow a custom suffix to be added to the module name',
@@ -275,7 +281,7 @@ var CoffeeFullstackGenerator = yeoman.generators.Base.extend({
   },
 
   ngModules: function() {
-    this.filters = this._.defaults(this.config.get('filters'), {
+    this.filters = this.lodash.defaults(this.config.get('filters'), {
       bootstrap: true,
       uibootstrap: true
     });
