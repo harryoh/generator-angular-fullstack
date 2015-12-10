@@ -33,7 +33,7 @@ var CoffeeFullstackGenerator = yeoman.generators.Base.extend({
   },
 
   info: function () {
-    this.log(this.yeoman);
+//    this.log(this.yeoman);
     this.log('Out of the box I create an AngularJS app with an Express server.\n');
   },
 

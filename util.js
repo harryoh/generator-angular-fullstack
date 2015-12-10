@@ -1,6 +1,7 @@
 'use strict';
 var path = require('path');
 var fs = require('fs');
+var glob = require('glob');
 
 module.exports = {
   rewrite: rewrite,
@@ -8,6 +9,14 @@ module.exports = {
   appName: appName,
   processDirectory: processDirectory
 };
+
+function expandFiles(pattern, options) {
+  options = options || {};
+  var cwd = options.cwd || process.cwd();
+  return glob.sync(pattern, options).filter(function (filepath) {
+    return fs.statSync(path.join(cwd, filepath)).isFile();
+  });
+}
 
 function rewriteFile (args) {
   args.path = args.path || process.cwd();
@@ -103,8 +112,8 @@ function templateIsUsable (self, filteredFile) {
 }
 
 function processDirectory (self, source, destination) {
-  var root = self.isPathAbsolute(source) ? source : path.join(self.sourceRoot(), source);
-  var files = self.expandFiles('**', { dot: true, cwd: root });
+  var root = path.isAbsolute(source) ? source : path.join(self.sourceRoot(), source);
+  var files = expandFiles('**', { dot: true, cwd: root });
   var dest, src;
 
   files.forEach(function(f) {
