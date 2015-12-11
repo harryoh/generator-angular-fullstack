@@ -12,11 +12,11 @@ var Generator = module.exports = function Generator() {
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }
-  this.appname = this._.slugify(this._.humanize(this.appname));
-  this.scriptAppName = this._.camelize(this.appname) + angularUtils.appName(this);
+  this.appname = this.lodash.slugify(this.lodash.humanize(this.appname));
+  this.scriptAppName = this.lodash.camelize(this.appname) + angularUtils.appName(this);
 
-  this.cameledName = this._.camelize(this.name);
-  this.classedName = this._.classify(this.name);
+  this.cameledName = this.lodash.camelize(this.name);
+  this.classedName = this.lodash.classify(this.name);
 
   this.filters = this.config.get('filters');
   this.sourceRoot(path.join(__dirname, '/templates'));

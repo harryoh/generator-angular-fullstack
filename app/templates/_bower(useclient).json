@@ -1,19 +1,19 @@
 {
-  "name": "<%= _.slugify(_.humanize(appname)) %>",
+  "name": "<%= lodash.slugify(lodash.humanize(appname)) %>",
   "version": "0.0.0",
   "dependencies": {<% if(filters.useclient) { %>
     "angular": "~1.4.*",
     "json3": "~3.3.1",
-    "es5-shim": "~4.1.3",<% if(filters.bootstrap) { %><% if (filters.sass) { %>
+    "es5-shim": "~4.3.1",<% if(filters.bootstrap) { %><% if (filters.sass) { %>
     "bootstrap-sass-official": "~3.3.4",<% } %>
-    "bootstrap": "~3.3.4",<% } %>
+    "bootstrap": "~3.3.6",<% } %>
     "angular-resource": "~1.4.*",
     "angular-cookies": "~1.4.*",
     "angular-sanitize": "~1.4.*",<% if(filters.ngroute) { %>
     "angular-route": "~1.4.*",<% } %><% if(filters.uibootstrap) { %>
     "angular-bootstrap": "~0.13.0",<% } %>
     "font-awesome": ">=4.1.0",
-    "lodash": "~3.9.3"<% if(filters.socketio) { %>,
+    "lodash": "~3.10.1"<% if(filters.socketio) { %>,
     "angular-socket-io": "~0.7.0"<% } %><% if(filters.uirouter) { %>,
     "angular-ui-router": "~0.2.10"<% } %><% } %>
   },
